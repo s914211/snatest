@@ -32,6 +32,7 @@
         });
 
         // Additional initialization code such as adding Event Listeners goes here
+        window.fbLoaded();
     };
 
     // Load the SDK asynchronously
@@ -48,6 +49,28 @@
     <!-- ENDBLOCK: FB SDK initialization -->
     
     <!-- BLOCK: Your playground -->
+    <div id="my-html-playground" class="container">
+        <div id="my-login-control" class="well">
+            <button id="my-login-button" class="btn btn-primary">Login with Facebook</button>
+            <p id="my-login-message"></p>
+        </div>
+    </div>
+    <script id="my-script-playground">
+        window.fbLoaded = function () {
+            FB.Event.subscribe('auth.login', function(response) {
+                // when user has been logged in, this block will be triggered.
+                var msg = "You're logged in.";
+                $("#my-login-message").html(msg);
+                // print out the response in the console.
+                console.log("Your login response:");
+                console.log(response);
+            });
+
+            $("#my-login-button").click(function(){
+                FB.login();
+            });
+        }
+    </script>
     <!-- ENDBLOCK: Your playground -->
 </body>
 </html>
